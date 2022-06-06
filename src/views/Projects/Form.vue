@@ -41,7 +41,14 @@ export default defineComponent({
   },
   methods: {
     save() {
-      this.store.commit('ADD_PROJECTS', this.projectName)
+      if(this.id) {
+        this.store.commit('EDIT_PROJECT', {
+          id: this.id,
+          name: this.projectName
+        })
+      } else {
+        this.store.commit('ADD_PROJECTS', this.projectName)
+      }
       this.projectName = '',
       this.$router.push('/Projects')
     }
