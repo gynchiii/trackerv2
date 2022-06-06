@@ -1,49 +1,50 @@
 <template>
-  <main class="columns is-gapless is-multiline" :class="{ 'modo-escuro' : modoEscuro}">
+  <main class="columns is-gapless is-multiline" :class="{ 'dark-mode': darkModeActive }">
     <div class="column is-one-quarter">
-      <BarraLateral @aoAlterarModo="alterarModo"/>
+      <LateralBar @toThemeChanged="trocarTema"/>
     </div>
-    <div class="column is-three-quarters conteudo">
-      <router-view></router-view>
+    <div class="column is-three-quarter content">
+    <!-- Here's vueRouter  -->
+    <router-view></router-view>
     </div>
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import BarraLateral from "./components/BarraLateral.vue";
+import { defineComponent } from 'vue';
+import LateralBar from './components/LateralBar.vue'
 
 export default defineComponent({
-  name: "App",
+  name: 'App',
   components: {
-    BarraLateral,
+    LateralBar
   },
   data () {
     return {
-      modoEscuro: false
+      darkModeActive: false
     }
   },
   methods: {
-    alterarModo (modoEscuro: boolean) : void {
-      this.modoEscuro = modoEscuro
+    trocarTema (darkModeActive: boolean) {
+      this.darkModeActive = darkModeActive
     }
   }
 });
 </script>
 
 <style>
-main {
-  --bg-primario: #fff;
-  --texto-primario: #000;
-}
-main.modo-escuro {
-  --bg-primario: #2b2d42;
-  --texto-primario: #ddd;
-}
 .lista {
   padding: 1.25rem;
 }
-.conteudo {
-  background-color: var(--bg-primario);
+main {
+  --bg-primary: #fff;
+  --text-primary: #000;
+}
+main.dark-mode {
+  --bg-primary: #2b2d42;
+  --text-primary: #ddd;
+}
+.content {
+  background-color: var(--bg-primary);
 }
 </style>
