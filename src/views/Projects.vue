@@ -1,19 +1,12 @@
 <template>
   <section class="projects">
     <h1 class="title">project</h1>
-    <form @submit.prevent="save">
-      <div class="field">
-        <label for="projectName">
-          Project Name
-        </label>
-        <input type="text" class="input" v-model="projectName" id="projectName">
-      </div>
-      <div class="field">
-        <button class="button" type="submit">
-          Save
-        </button>
-      </div>
-    </form>
+    <router-link class="new-project button" to="/projects/new">
+      <span class="icon is-small">
+          <i class="fas fa-plus ml-1"></i>
+      </span>
+      <span class="ml-1">New Project</span>
+    </router-link>
     <table class="table is-fullwidth">
       <thead>
         <tr>
@@ -23,6 +16,7 @@
           <th>
             Name
           </th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -32,6 +26,13 @@
           </td>
           <td>
             {{ project.name }}
+          </td>
+          <td>
+              <router-link :to="`projects/${project.id}`" class="button">
+                <span class="icon is-small">
+                  <i class="fas fa-pencil-alt"></i>
+                </span>  
+              </router-link>
           </td>
         </tr>
       </tbody>
@@ -44,25 +45,13 @@ import { useStore } from '@/store'
 import { computed, defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'Projects',
-  data() {
-    return {
-      projectName: ''
-    }
-  },
-  methods: {
-    save() {
-      this.store.commit('ADD_PROJECTS', this.projectName)
-      this.projectName = ''
-    }
-  },
-  setup() {
-    const store = useStore()
-      return {
-        store,
-        projects: computed(() => store.state.projects)
-      }
-    }
+    name: "Projects",
+    setup() {
+        const store = useStore();
+        return {
+            projects: computed(() => store.state.projects)
+        };
+    },
 })
 </script>
 
@@ -70,4 +59,8 @@ export default defineComponent({
 .projects {
   padding: 1.25rem;
 }
+.new-project {
+  padding: 1rem;
+}
+
 </style>
