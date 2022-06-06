@@ -28,7 +28,7 @@
             {{ project.name }}
           </td>
           <td>
-              <router-link :to="`projects/${project.id}`" class="button">
+              <router-link :to="`/projects/${project.id}`" class="button">
                 <span class="icon is-small">
                   <i class="fas fa-pencil-alt"></i>
                 </span>  
