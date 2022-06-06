@@ -24,7 +24,8 @@ const routes: RouteRecordRaw[] = [
     {
       path: '/projects/:id',
       name: 'edit project',
-      component: Form
+      component: Form,
+      props: true
     }
 ];
 

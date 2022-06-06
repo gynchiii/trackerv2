@@ -23,6 +23,17 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'Form',
+  props: {
+    id: {
+      type: String
+    }
+  },
+  mounted() {
+    if(this.id) {
+      const project = this.store.state.projects.find(proj => proj.id == this.id)
+      this.projectName = project?.name || ''
+    }
+  },
   data() {
     return {
       projectName: ''
